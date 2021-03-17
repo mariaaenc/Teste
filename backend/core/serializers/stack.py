@@ -5,4 +5,4 @@ from backend.core.models import Stack
 class StackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Stack
-        fields = ["id", "name"]
+        fields = ["id", "name", "person"]

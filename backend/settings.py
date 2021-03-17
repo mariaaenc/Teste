@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "backend.core",
     "drf_yasg",
     "cpffield",
+    "django_extensions",
 ]
 
 MIDDLEWARE = [
