@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.12.5",
+    "bootstrap": "^5.0.0-beta2",
     "core-js": "^3.8.3",
     "nuxt": "^2.14.12",
     "nuxt-buefy": "^0.4.4"
@@ -25,6 +26,9 @@
     "eslint-plugin-nuxt": "^2.0.0",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^7.5.0",
-    "prettier": "^2.2.1"
+    "fibers": "^5.0.0",
+    "prettier": "^2.2.1",
+    "sass": "^1.32.8",
+    "sass-loader": "^10.1.1"
   }
 }

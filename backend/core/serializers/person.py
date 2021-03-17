@@ -5,4 +5,4 @@ from backend.core.models import Person
 class PersonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Person
-        fields = ["id", "name", "address", "email", "cpf", "date_birth"]
+        fields = ["id", "name", "address", "email", "cpf", "date_birth", "stack"]
