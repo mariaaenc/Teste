@@ -1,9 +1,9 @@
 <template>
   <section>
     <div class="m-5 p-2 d-flex flex-column rounded form">
-      <b-field>
-        <p type="is-blue">Formulário do Técnico</p>
-      </b-field>
+      <p>Formulário do Técnico</p>
+      <input class="input is-info" type="text" placeholder="Info input" />
+      <input class="input is-info" type="text" placeholder="Info input" />
       <b-field>
         <b-input placeholder="Nome do Técnico"></b-input>
       </b-field>
@@ -40,6 +40,11 @@ export default {}
 </script>
 
 <style>
+p {
+  font-weight: bold;
+  color: #244873;
+  font-size: 20px;
+}
 .form {
   background-color: #e5e5e5;
 }

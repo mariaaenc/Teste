@@ -1,11 +1,22 @@
 <template>
   <div>
-    <nav class="pl-6 navbar is-blue size">
+    <nav
+      class="navbar pl-6 is-blue size"
+      role="navigation"
+      aria-label="main navigation"
+    >
       <div class="navbar-brand">Teste BoxTI</div>
     </nav>
-    <section class="columns">
-      <aside class="column is-2 section nav">
-        <ul class="menu-list">
+
+    <section class="main-content columns">
+      <aside class="column is-2 section is-large nav">
+        <ul class="menu-list p-0">
+          <li v-for="(item, key) of globalItems" :key="key" class="p-0">
+            <nuxt-link :to="item.to" exact-active-class="is-active">
+              <b-icon :icon="item.icon" />
+              {{ item.title }}
+            </nuxt-link>
+          </li>
           <span v-if="loggedIn">
             <li v-for="(item, key) of authenticatedItems" :key="key">
               <nuxt-link :to="item.to" exact-active-class="is-active">
@@ -16,6 +27,7 @@
           </span>
         </ul>
       </aside>
+
       <div class="container column is-10">
         <nuxt />
       </div>
@@ -28,6 +40,13 @@ import { mapState } from 'vuex'
 export default {
   data() {
     return {
+      globalItems: [
+        {
+          title: 'Home',
+          icon: 'home',
+          to: { name: 'index' },
+        },
+      ],
       authenticatedItems: [
         {
           title: 'Lista de Técnicos',
@@ -52,5 +71,3 @@ export default {
   },
 }
 </script>
-
-<style></style>
