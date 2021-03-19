@@ -51,7 +51,7 @@
           type="text"
         />
       </b-field>
-      <b-field class="box d-flex">
+      <b-field class="box">
         <b-field v-for="stack in stacks" :key="stack.id" class="flex-row">
           <div class="block">
             <b-checkbox v-model="checkboxGroup" :native-value="stack.name">
@@ -87,7 +87,6 @@ export default {
     }
   },
   async fetch() {
-    this.persons = await this.$axios.$get('/api/persons')
     this.stacks = await this.$axios.$get('/api/stacks')
   },
   methods: {

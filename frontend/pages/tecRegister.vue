@@ -7,9 +7,7 @@ import FormRegister from '@/components/FormRegister'
 export default {
   components: { FormRegister },
   data() {
-    return {
-      person: {},
-    }
+    return {}
   },
 }
 </script>

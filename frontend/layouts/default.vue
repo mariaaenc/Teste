@@ -12,14 +12,22 @@
       <aside class="column is-2 section is-large nav pt-5">
         <ul class="menu-list p-0">
           <li v-for="(item, key) of globalItems" :key="key">
-            <nuxt-link :to="item.to" exact-active-class="is-active">
+            <nuxt-link
+              :to="item.to"
+              exact-active-class="is-active"
+              class="link"
+            >
               <b-icon :icon="item.icon" />
               {{ item.title }}
             </nuxt-link>
           </li>
           <span v-if="loggedIn">
             <li v-for="(item, key) of authenticatedItems" :key="key">
-              <nuxt-link :to="item.to" exact-active-class="is-active">
+              <nuxt-link
+                :to="item.to"
+                exact-active-class="is-active"
+                class="link"
+              >
                 <b-icon :icon="item.icon" />
                 {{ item.title }}
               </nuxt-link>
@@ -80,9 +88,5 @@ export default {
 
 .nav {
   background-color: #2f3c4a;
-}
-
-.nuxt-link-active {
-  text-decoration: none;
 }
 </style>

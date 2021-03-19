@@ -1,68 +1,61 @@
 <template>
-  <section>
-    <div class="m-5 table d-flex flex-column rounded">
-      <b-table :data="persons">
-        <b-field>
-          <input class="mr-3 input" placeholder="Nome do técnico" />
-          <b-select placeholder="Selecione uma stack">
-            <option
-              v-for="option in columns"
-              :key="option.id"
-              :value="option.id"
-            >
-              {{ option.name }}
-            </option>
-          </b-select>
-          <b-button
-            class="ml-5"
-            type="is-blue"
-            icon-left="bi bi-search"
-            @click="oi"
-          ></b-button>
-        </b-field>
-        <template v-for="column in columns">
-          <b-table-column :key="column.id" :label="column.label">
-            <template #default="props">
-              <span v-if="column.field == 'actions'">
-                <div class="buttons">
-                  <b-button
-                    class="border-0"
-                    type="is-danger"
-                    outlined
-                    icon-left="delete"
-                    @click="confirmRemove(props.row)"
-                  ></b-button>
-                  <b-button
-                    class="border-0"
-                    type="is-blue"
-                    outlined
-                    icon-left="pencil"
-                    @click="oi"
-                  ></b-button>
-                </div>
-              </span>
-              <span v-if="column.field == 'created_at'">
-                {{ new Date(props.row[column.field]).toLocaleDateString() }} -
-                {{ new Date(props.row[column.field]).toLocaleTimeString() }}
-              </span>
-              <span v-else>
-                {{ props.row[column.field] }}
-              </span>
-            </template>
-          </b-table-column>
-        </template>
-      </b-table>
-    </div>
-    {{ persons }}
-  </section>
+  <div class="m-5 table d-flex flex-column rounded">
+    <b-table :data="persons">
+      <b-field>
+        <input class="mr-3 input" placeholder="Nome do técnico" />
+        <!-- <b-select placeholder="Selecione uma stack">
+        <option v-for="option in stacks" :key="option.id" :value="option.id">
+          {{ option.name }}
+        </option>
+      </b-select> -->
+        <b-button
+          class="ml-5"
+          type="is-blue"
+          icon-left="bi bi-search"
+          @click="search()"
+        ></b-button>
+      </b-field>
+      <template v-for="column in columns">
+        <b-table-column :key="column.id" :label="column.label">
+          <template #default="props">
+            <span v-if="column.field == 'actions'">
+              <div class="buttons">
+                <b-button
+                  class="border-0"
+                  type="is-danger"
+                  outlined
+                  icon-left="delete"
+                  @click="confirmRemove(props.row)"
+                ></b-button>
+                <b-button
+                  class="border-0"
+                  type="is-blue"
+                  outlined
+                  icon-left="pencil"
+                  @click="editar(props.row)"
+                ></b-button>
+              </div>
+            </span>
+            <span v-if="column.field == 'created_at'">
+              {{ new Date(props.row[column.field]).toLocaleDateString() }} -
+              {{ new Date(props.row[column.field]).toLocaleTimeString() }}
+            </span>
+            <span v-else>
+              {{ props.row[column.field] }}
+            </span>
+          </template>
+        </b-table-column>
+      </template>
+    </b-table>
+  </div>
 </template>
 
 <script>
-// import { mapState } from 'vuex'
 export default {
   data() {
     return {
       persons: [],
+      stacks: [],
       columns: [
         {
           field: 'id',
@@ -94,14 +87,12 @@ export default {
   },
   async fetch() {
     this.persons = await this.$axios.$get('/api/persons')
+    this.stacks = await this.$axios.$get('/api/stacks')
   },
-  /*   computed: {
-    ...mapState('person', ['persons']),
-  }, */
   methods: {
     confirmRemove(person) {
       this.$buefy.dialog.confirm({
-        title: 'Deletar Cadastrp?',
+        title: 'Deletar Cadastro?',
         message: 'Tem certeza que deseja <b>deletar</b> esse cadastro?',
         confirmText: 'Delete',
         cancelText: 'Cancel',
@@ -126,7 +117,15 @@ export default {
         }
       }
     },
-    async edit(person) {},
+    editar(person) {
+      this.$router.push({
+        name: `editRegister`,
+        params: { person },
+      })
+    },
+    search() {
+      alert('oi')
+    },
   },
 }
 </script>
