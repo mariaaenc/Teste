@@ -19,7 +19,7 @@ $menu-item-active-color: $blue;
 // Lists and maps
 $custom-colors: null !default;
 $custom-shades: null !default;
-
+$checkbox-border-color: $blue;
 // Setup $colors to use as bulma classes (e.g. 'is-twitter')
 $colors: mergeColorMaps(
   (

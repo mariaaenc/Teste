@@ -3,14 +3,20 @@
     <div class="m-5 table d-flex flex-column rounded">
       <b-table :data="persons">
         <b-field>
-          <b-input placeholder="Nome do técnico"></b-input>
+          <input class="mr-3 input" placeholder="Nome do técnico" />
           <b-select placeholder="Selecione uma stack">
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
+            <option
+              v-for="option in columns"
+              :key="option.id"
+              :value="option.id"
+            >
+              {{ option.name }}
+            </option>
           </b-select>
           <b-button
+            class="ml-5"
             type="is-blue"
-            icon-left="card-search"
+            icon-left="bi bi-search"
             @click="oi"
           ></b-button>
         </b-field>
@@ -35,6 +41,10 @@
                   ></b-button>
                 </div>
               </span>
+              <span v-if="column.field == 'created_at'">
+                {{ new Date(props.row[column.field]).toLocaleDateString() }} -
+                {{ new Date(props.row[column.field]).toLocaleTimeString() }}
+              </span>
               <span v-else>
                 {{ props.row[column.field] }}
               </span>
@@ -43,6 +53,7 @@
         </template>
       </b-table>
     </div>
+    {{ persons }}
   </section>
 </template>
 
@@ -71,7 +82,7 @@ export default {
           label: 'Email',
         },
         {
-          field: 'date_birth',
+          field: 'created_at',
           label: 'Criado em',
         },
         {
@@ -100,6 +111,8 @@ export default {
       })
     },
     async remove(person) {
+      person.deleted_at = new Date().toDateString()
+      /* Deveria guardar as informações em um arquivo? */
       const url = `/api/persons/${person.id}`
       try {
         await this.$axios.$delete(url)

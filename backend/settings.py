@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     "drf_yasg",
     "cpffield",
     "django_extensions",
+    "django_mysql",
 ]
 
 MIDDLEWARE = [

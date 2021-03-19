@@ -1,14 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
 
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css");
+
 * {
   font-family: Nunito, sans-serif;
-}
-
-.size {
-  height: 10px;
-  font-weight: bold;
-}
-
-.nav {
-  background-color: #2f3c4a;
 }

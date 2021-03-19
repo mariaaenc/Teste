@@ -9,9 +9,9 @@
     </nav>
 
     <section class="main-content columns">
-      <aside class="column is-2 section is-large nav">
+      <aside class="column is-2 section is-large nav pt-5">
         <ul class="menu-list p-0">
-          <li v-for="(item, key) of globalItems" :key="key" class="p-0">
+          <li v-for="(item, key) of globalItems" :key="key">
             <nuxt-link :to="item.to" exact-active-class="is-active">
               <b-icon :icon="item.icon" />
               {{ item.title }}
@@ -71,3 +71,18 @@ export default {
   },
 }
 </script>
+
+<style>
+.size {
+  height: 10px;
+  font-weight: bold;
+}
+
+.nav {
+  background-color: #2f3c4a;
+}
+
+.nuxt-link-active {
+  text-decoration: none;
+}
+</style>
