@@ -52,15 +52,16 @@
         />
       </b-field>
       <b-field class="box">
-        <b-field v-for="stack in stacks" :key="stack.id" class="flex-row">
-          <div class="block">
-            <b-checkbox v-model="checkboxGroup" :native-value="stack.name">
-              {{ stack.name }}
-            </b-checkbox>
-          </div>
-        </b-field>
+        <div
+          v-for="stack in stacks"
+          :key="stack.id"
+          class="is-flex-direction-row is-flex-wrap-wrap"
+        >
+          <b-checkbox v-model="checkboxGroup" :native-value="stack.name">
+            {{ stack.name }}
+          </b-checkbox>
+        </div>
       </b-field>
-      <div><b>Selecionadas:</b> {{ checkboxGroup }}</div>
       <hr />
       <b-field class="d-flex justify-content-end">
         <b-button native-type="submit" type="is-success"> Salvar </b-button>

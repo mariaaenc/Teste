@@ -1,22 +1,33 @@
 <template>
   <div class="m-5 table d-flex flex-column rounded">
     <b-table :data="persons">
-      <b-field>
-        <input class="mr-3 input" placeholder="Nome do técnico" />
-        <!-- <b-select placeholder="Selecione uma stack">
-        <option v-for="option in stacks" :key="option.id" :value="option.id">
-          {{ option.name }}
-        </option>
-      </b-select> -->
+      <!-- <b-field>
+        <input
+          v-model="nameInput"
+          class="mr-3 input is-info"
+          placeholder="Nome do técnico"
+        />
+        <div class="select is-info">
+          <b-select v-model="selected" placeholder="Selecione uma stack">
+            <option
+              v-for="option in stacks"
+              :key="option.id"
+              :value="option.name"
+            >
+              {{ option.name }}
+            </option>
+          </b-select>
+        </div>
         <b-button
           class="ml-5"
           type="is-blue"
           icon-left="bi bi-search"
-          @click="search()"
+          @click="search(selected, nameInput)"
         ></b-button>
-      </b-field>
+      </b-field> -->
+      <!-- :custom-search="search(selected, nameInput)" -->
       <template v-for="column in columns">
-        <b-table-column :key="column.id" :label="column.label">
+        <b-table-column :key="column.id" :label="column.label" v-bind="column">
           <template #default="props">
             <span v-if="column.field == 'actions'">
               <div class="buttons">
@@ -47,6 +58,9 @@
         </b-table-column>
       </template>
     </b-table>
+    <li v-for="item in persons" :key="item.id">
+      {{ item.stacks }}
+    </li>
   </div>
 </template>
 
@@ -54,6 +68,9 @@
 export default {
   data() {
     return {
+      selected: '',
+      names: [],
+      nameInput: '',
       persons: [],
       stacks: [],
       columns: [
@@ -65,6 +82,7 @@ export default {
         {
           field: 'name',
           label: 'Nome',
+          searchable: true,
         },
         {
           field: 'cpf',
@@ -73,6 +91,12 @@ export default {
         {
           field: 'email',
           label: 'Email',
+        },
+        {
+          field: 'stacks',
+          label: 'Stacks',
+          searchable: true,
+          visible: false,
         },
         {
           field: 'created_at',
@@ -123,9 +147,11 @@ export default {
         params: { person },
       })
     },
-    search() {
-      alert('oi')
-    },
+    /*     search(selected, nameInput) {
+      this.names = this.persons.filter(
+        (person) => person.stacks === selected || person.name === nameInput
+      )
+    }, */
   },
 }
 </script>
@@ -133,7 +159,6 @@ export default {
 <style>
 .table {
   width: 90%;
-  background-color: #e5e5e5;
   border: #b9b9b9 solid 0.2px;
 }
 </style>

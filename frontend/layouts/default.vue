@@ -9,7 +9,7 @@
     </nav>
 
     <section class="main-content columns">
-      <aside class="column is-2 section is-large nav pt-5">
+      <aside class="column is-2 section nav pt-5 pl-5">
         <ul class="menu-list p-0">
           <li v-for="(item, key) of globalItems" :key="key">
             <nuxt-link

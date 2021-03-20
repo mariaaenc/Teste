@@ -15,11 +15,14 @@ $menu-item-color: white;
 $menu-item-active-background-color: white;
 $menu-item-hover-color: $blue;
 $menu-item-active-color: $blue;
+$table-background-color: #e5e5e5;
+$table-head-cell-color: $blue;
+$checkbox-border-color: $blue;
+
 
 // Lists and maps
 $custom-colors: null !default;
 $custom-shades: null !default;
-$checkbox-border-color: $blue;
 // Setup $colors to use as bulma classes (e.g. 'is-twitter')
 $colors: mergeColorMaps(
   (
