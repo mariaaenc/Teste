@@ -1,29 +1,35 @@
 <template>
-  <b-table :data="persons" paginated pagination-rounded per-page="5">
-    <!--<b-field>
-        <input
-          v-model="nameInput"
-          class="mr-3 input is-info"
-          placeholder="Nome do técnico"
-        />
-        <div class="select is-info">
-          <b-select v-model="selected" placeholder="Selecione uma stack">
-            <option
-              v-for="option in stacks"
-              :key="option.id"
-              :value="option.name"
-            >
-              {{ option.name }}
-            </option>
-          </b-select>
-        </div>
-        <b-button
-          class="ml-5"
-          type="is-blue"
-          icon-left="bi bi-search"
-          @click="search(selected, nameInput)"
-        ></b-button>
-      </b-field>  -->
+  <b-table :data="names" paginated pagination-rounded per-page="5">
+    <b-field>
+      <input
+        v-model="nameInput"
+        class="mr-3 input is-info"
+        placeholder="Nome do técnico"
+      />
+      <div class="select is-info">
+        <b-select v-model="selected" placeholder="Selecione uma stack">
+          <option
+            v-for="option in stacks"
+            :key="option.id"
+            :value="option.name"
+          >
+            {{ option.name }}
+          </option>
+        </b-select>
+      </div>
+      <b-button
+        class="ml-5"
+        type="is-blue"
+        icon-left="bi bi-search"
+        @click="search(selected, nameInput)"
+      ></b-button>
+      <b-button
+        class="ml-5"
+        type="is-danger"
+        icon-left="bi bi-x"
+        @click="clear()"
+      ></b-button>
+    </b-field>
     <template v-for="column in columns">
       <b-table-column :key="column.id" :label="column.label" v-bind="column">
         <template #default="props">
@@ -49,6 +55,12 @@
             {{ new Date(props.row[column.field]).toLocaleDateString() }} -
             {{ new Date(props.row[column.field]).toLocaleTimeString() }}
           </span>
+          <ul v-if="column.field == 'stacks'">
+            <!-- {{ props.row[column.field] }} -->
+            <li v-for="stack in props.row[column.field]" :key="stack.id">
+              {{ stack.stack_name }}
+            </li>
+          </ul>
           <span v-else>
             {{ props.row[column.field] }}
           </span>
@@ -66,6 +78,7 @@ export default {
       names: [],
       nameInput: '',
       persons: [],
+      searchable_persons: [],
       stacks: [],
       columns: [
         {
@@ -106,6 +119,7 @@ export default {
   async fetch() {
     this.persons = await this.$axios.$get('/api/persons')
     this.stacks = await this.$axios.$get('/api/stacks')
+    this.names = this.persons
   },
   methods: {
     confirmRemove(person) {
@@ -141,11 +155,20 @@ export default {
         params: { person },
       })
     },
-    /*     search(selected, nameInput) {
-      this.names = this.persons.filter(
-        (person) => person.stacks === selected || person.name === nameInput
-      ) tem que filtrar as stacks
-    }, */
+    search(selected, nameInput) {
+      this.names = this.persons.filter((person) => {
+        let a = 0
+        person.stacks.forEach((stack) => {
+          if (stack.stack.name.includes(selected)) {
+            a = 1
+          }
+        })
+        return person.name.includes(nameInput) && a
+      }) // tem que filtrar as stacks
+    },
+    clear() {
+      this.names = this.persons
+    },
   },
 }
 </script>

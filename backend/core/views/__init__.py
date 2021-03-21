@@ -1,2 +1,2 @@
-from .person import PersonViewSet
+from .person import PersonViewSet, StackPersonViewSet
 from .stack import StackViewSet

@@ -1,7 +1,12 @@
 from rest_framework import viewsets
 
-from backend.core.models import Person
-from backend.core.serializers import PersonSerializer
+from backend.core.models import Person, StackPerson
+from backend.core.serializers import PersonSerializer, StackPersonSerializer
+
+
+class StackPersonViewSet(viewsets.ModelViewSet):
+    queryset = StackPerson.objects.all()
+    serializer_class = StackPersonSerializer
 
 
 class PersonViewSet(viewsets.ModelViewSet):

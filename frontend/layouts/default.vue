@@ -8,7 +8,7 @@
       <div class="navbar-brand">Teste BoxTI</div>
     </nav>
 
-    <section class="main-content columns">
+    <section class="main-content columns tm">
       <aside class="column is-2 section nav pt-5 pl-5">
         <ul class="menu-list p-0">
           <li v-for="(item, key) of globalItems" :key="key">
@@ -81,6 +81,9 @@ export default {
 </script>
 
 <style>
+.tm {
+  min-height: calc(100vh - 52px + 0.75rem);
+}
 .size {
   height: 10px;
   font-weight: bold;
