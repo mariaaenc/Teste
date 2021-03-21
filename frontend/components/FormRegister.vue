@@ -1,8 +1,5 @@
 <template>
-  <form
-    class="mx-5 mt-3 p-3 d-flex flex-column rounded form"
-    @submit.prevent="submit"
-  >
+  <form class="mx-5 mt-3 p-3 rounded form" @submit.prevent="submit">
     <input id="person-id" v-model="person.id" type="hidden" />
     <div class="p-1">
       <p>Formulário do Técnico</p>
@@ -52,11 +49,7 @@
         />
       </b-field>
       <b-field class="box">
-        <div
-          v-for="stack in stacks"
-          :key="stack.id"
-          class="is-flex-direction-row is-flex-wrap-wrap"
-        >
+        <div v-for="stack in stacks" :key="stack.id">
           <b-checkbox v-model="checkboxGroup" :native-value="stack.name">
             {{ stack.name }}
           </b-checkbox>
