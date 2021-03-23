@@ -13,3 +13,6 @@ class Person(models.Model):
     created_at = models.DateTimeField(default=datetime.now)
     updated_at = models.DateTimeField(default=datetime.now)
     deleted_at = models.DateTimeField(default=datetime.now)
+    # stacks = models.ManyToManyField(
+    #     "Stack", related_name="person_stacks", through="StackPerson"
+    # )

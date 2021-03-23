@@ -53,21 +53,41 @@
           />
         </b-field>
 
+        <div class="d-flex justify-content-end">
+          <b-button
+            type="is-primary"
+            icon-left="plus-box-multiple"
+            size="is-small"
+            @click="add()"
+          >
+            Nova Stack
+          </b-button>
+        </div>
         <b-field>
-          <input
-            v-model="person.stacks"
-            class="input is-info"
+          <b-tag
+            v-for="stack in person.stacks"
+            :key="stack.id"
+            closable
+            class="is-primary ml-1"
             placeholder="Stacks"
-            type="text"
-          />
+          >
+            {{ stack.stack_name }}
+          </b-tag>
+        </b-field>
+        <b-field class="box">
+          <div v-for="stack in stacks" :key="stack.id">
+            <b-checkbox v-model="checkboxGroup" :native-value="stack.name">
+              {{ stack.name }}
+            </b-checkbox>
+          </div>
         </b-field>
         <hr />
-        <b-field>
+        <div class="d-flex justify-content-end">
           <router-link to="tecList" class="button is-primary mr-2 link">
             Voltar
           </router-link>
           <b-button native-type="submit" type="is-success"> Salvar </b-button>
-        </b-field>
+        </div>
       </div>
     </form>
   </section>
@@ -81,9 +101,21 @@ export default {
     }
   },
   data() {
-    return {}
+    return {
+      stacks: [],
+      checkboxGroup: [],
+      newStacks: [],
+    }
+  },
+  async fetch() {
+    this.stacks = await this.$axios.$get('/api/stacks')
   },
   methods: {
+    add() {
+      this.$router.push({
+        name: `stacks`,
+      })
+    },
     async submit() {
       const url = `/api/persons/${this.person.id}/`
       this.person.update_at = new Date().toDateString()

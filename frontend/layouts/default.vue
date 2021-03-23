@@ -67,6 +67,11 @@ export default {
           to: { name: 'tecRegister' },
         },
         {
+          title: 'Stacks',
+          icon: 'plus-box-multiple',
+          to: { name: 'stacks' },
+        },
+        {
           title: 'Sair',
           icon: 'logout',
           to: { name: 'logout' },

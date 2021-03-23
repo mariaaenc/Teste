@@ -60,7 +60,7 @@
         <b-button native-type="submit" type="is-success"> Salvar </b-button>
       </b-field>
     </div>
-    <div>Selecionados: {{ stacks_ }}</div>
+    <div>Selecionados: {{ person }}</div>
   </form>
 </template>
 
@@ -76,7 +76,7 @@ export default {
   },
   data() {
     return {
-      person: {},
+      person: { stacks: [] },
       stacks: [],
       stacks_: [],
       checkboxGroup: [],
@@ -88,23 +88,14 @@ export default {
   methods: {
     async submit() {
       try {
-        const person = await this.$axios.$post('/api/persons/', this.person)
-        alert(person.id)
+        this.person.stacks = []
         this.checkboxGroup.forEach((element) => {
-          this.stacks_.push(
-            this.stacks.filter((stack) => stack.name === element)
-          )
-        })
-        window.c = []
-        this.stacks_.forEach((stack) => {
-          const stackId = stack.id
-          const personId = person.id
-          const cstack = this.$axios.$post('/api/stacksPersons/', {
-            stack: stackId,
-            person: personId,
+          this.person.stacks.push({
+            stack: this.stacks.filter((stack) => stack.name === element)[0].id,
           })
-          window.c.push(cstack)
         })
+        const personn = await this.$axios.$post('/api/persons/', this.person)
+        alert(personn.id)
         this.$toasted.global.defaultSuccess()
       } catch (err) {
         for (const item in err.response.data) {

@@ -67,6 +67,7 @@
         </template>
       </b-table-column>
     </template>
+    <!--     {{ persons }} -->
   </b-table>
 </template>
 
@@ -159,12 +160,12 @@ export default {
       this.names = this.persons.filter((person) => {
         let a = 0
         person.stacks.forEach((stack) => {
-          if (stack.stack.name.includes(selected)) {
+          if (stack.stack_name.includes(selected)) {
             a = 1
           }
         })
         return person.name.includes(nameInput) && a
-      }) // tem que filtrar as stacks
+      })
     },
     clear() {
       this.names = this.persons
