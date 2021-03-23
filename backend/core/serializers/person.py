@@ -39,13 +39,10 @@ class PersonSerializer(serializers.ModelSerializer):
             date_birth=person["date_birth"],
         )
         person.save()
-        print("@@@@@@@@@@@@@@@@@@@")
-        print(person)
         for stack in stacks:
             print(stack)
             stackPerson = StackPerson(stack=stack["stack"], person=person)
             stackPerson.save()
-        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
         return person
 
     def update(self, instance, validated_data):
@@ -73,15 +70,14 @@ class PersonSerializer(serializers.ModelSerializer):
                 newStackPerson.save()
                 fixedStacks.append(newStackPerson.stack.id)
 
-        print("******fixed*******")
+        print("******stacks a serem fixadas*******")
         print(fixedStacks)
         for i in allStacksPerson:
             allStacksPersonID = i.stack.id
             print("******todas as stacks desse usuário*******")
             print(allStacksPersonID)
             if allStacksPersonID not in fixedStacks:
-                i.stack.delete()
                 print("******relações a serem deletadas*******")
                 print(allStacksPersonID)
-
+                i.delete()
         return instance
