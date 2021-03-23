@@ -52,15 +52,14 @@
             </div>
           </span>
           <span v-if="column.field == 'created_at'">
-            {{ new Date(props.row[column.field]).toLocaleDateString() }} -
+            {{ new Date(props.row[column.field]).toLocaleDateString() }} às
             {{ new Date(props.row[column.field]).toLocaleTimeString() }}
           </span>
-          <ul v-if="column.field == 'stacks'">
-            <!-- {{ props.row[column.field] }} -->
+          <!-- <ul v-if="column.field == 'stacks'">
             <li v-for="stack in props.row[column.field]" :key="stack.id">
               {{ stack.stack_name }}
             </li>
-          </ul>
+          </ul> -->
           <span v-else>
             {{ props.row[column.field] }}
           </span>
@@ -89,7 +88,7 @@ export default {
         {
           field: 'name',
           label: 'Nome',
-          searchable: true,
+          // searchable: true,
         },
         {
           field: 'cpf',
@@ -102,8 +101,8 @@ export default {
         {
           field: 'stacks',
           label: 'Stacks',
-          searchable: true,
-          visible: true,
+          // searchable: true,
+          visible: false,
           width: '40',
         },
         {
