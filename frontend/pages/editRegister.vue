@@ -53,7 +53,7 @@
           />
         </b-field>
 
-        <div class="d-flex justify-content-end">
+        <!--<div class="d-flex justify-content-end">
           <b-button
             type="is-primary"
             icon-left="plus-box-multiple"
@@ -62,12 +62,11 @@
           >
             Nova Stack
           </b-button>
-        </div>
+        </div> -->
         <b-field>
           <b-tag
             v-for="stack in person.stacks"
             :key="stack.id"
-            closable
             class="is-primary ml-1"
             placeholder="Stacks"
           >
@@ -90,6 +89,7 @@
         </div>
       </div>
     </form>
+    <!-- {{ checkboxGroup }} -->
   </section>
 </template>
 
@@ -104,22 +104,28 @@ export default {
     return {
       stacks: [],
       checkboxGroup: [],
-      newStacks: [],
     }
   },
   async fetch() {
     this.stacks = await this.$axios.$get('/api/stacks')
+    this.loadCheck()
   },
   methods: {
-    add() {
-      this.$router.push({
-        name: `stacks`,
+    loadCheck() {
+      this.person.stacks.forEach((stack) => {
+        this.checkboxGroup.push(stack.stack_name)
       })
     },
     async submit() {
       const url = `/api/persons/${this.person.id}/`
-      this.person.update_at = new Date().toDateString()
       try {
+        this.person.stacks = []
+        this.checkboxGroup.forEach((element) => {
+          this.person.stacks.push({
+            stack: this.stacks.filter((stack) => stack.name === element)[0].id,
+          })
+        })
+        this.person.updated_at = new Date().toISOString()
         await this.$axios.patch(url, this.person)
         this.$toasted.global.defaultSuccess()
       } catch (err) {
@@ -128,6 +134,11 @@ export default {
         }
       }
     },
+    /*    add() {
+      this.$router.push({
+        name: `stacks`,
+      })
+    }, */
   },
 }
 </script>

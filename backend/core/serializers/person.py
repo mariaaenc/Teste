@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from backend.core.models import Person, StackPerson, Stack
+from backend.core.models import Person, StackPerson
 from .stackPersons import StacksPersonSerializer
 from django.db import transaction
 
@@ -52,6 +52,8 @@ class PersonSerializer(serializers.ModelSerializer):
         instance.email = validated_data.get("email", instance.email)
         instance.cpf = validated_data.get("cpf", instance.cpf)
         instance.date_birth = validated_data.get("date_birth", instance.date_birth)
+        instance.updated_at = validated_data.get("updated_at", instance.updated_at)
+        # instance.deleted_at = validated_data.get("deleted_at", instance.deleted_at)
         instance.save()
 
         fixedStacks = []

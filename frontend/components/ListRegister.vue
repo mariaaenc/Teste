@@ -24,10 +24,10 @@
         @click="search(selected, nameInput)"
       ></b-button>
       <b-button
-        class="ml-5"
+        class="ml-2"
         type="is-danger"
         icon-left="bi bi-x"
-        @click="clear()"
+        @click="reset()"
       ></b-button>
     </b-field>
     <template v-for="column in columns">
@@ -51,10 +51,16 @@
               ></b-button>
             </div>
           </span>
+
           <span v-if="column.field == 'created_at'">
             {{ new Date(props.row[column.field]).toLocaleDateString() }} às
             {{ new Date(props.row[column.field]).toLocaleTimeString() }}
           </span>
+
+          <!-- <span v-if="column.field == 'updated_at'">
+            {{ new Date(props.row[column.field]).toLocaleDateString() }} às
+            {{ new Date(props.row[column.field]).toLocaleTimeString() }}
+          </span> -->
           <!-- <ul v-if="column.field == 'stacks'">
             <li v-for="stack in props.row[column.field]" :key="stack.id">
               {{ stack.stack_name }}
@@ -110,6 +116,11 @@ export default {
           label: 'Criado em',
         },
         {
+          field: 'updated_at',
+          label: 'Atualizado em',
+          visible: false,
+        },
+        {
           field: 'actions',
           label: 'Ações',
         },
@@ -157,17 +168,19 @@ export default {
     },
     search(selected, nameInput) {
       this.names = this.persons.filter((person) => {
-        let a = 0
+        let a = false
         person.stacks.forEach((stack) => {
           if (stack.stack_name.includes(selected)) {
-            a = 1
+            a = true
           }
         })
         return person.name.includes(nameInput) && a
       })
     },
-    clear() {
+    reset() {
       this.names = this.persons
+      this.selected = ''
+      this.nameInput = ''
     },
   },
 }

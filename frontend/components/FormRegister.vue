@@ -60,7 +60,7 @@
         <b-button native-type="submit" type="is-success"> Salvar </b-button>
       </b-field>
     </div>
-    <div>Selecionados: {{ person }}</div>
+    <!-- <div>Selecionados: {{ person }}</div> -->
   </form>
 </template>
 
@@ -94,8 +94,9 @@ export default {
             stack: this.stacks.filter((stack) => stack.name === element)[0].id,
           })
         })
-        const personn = await this.$axios.$post('/api/persons/', this.person)
-        alert(personn.id)
+        /* const personn = */
+        await this.$axios.$post('/api/persons/', this.person)
+        // alert(personn.id)
         this.$toasted.global.defaultSuccess()
       } catch (err) {
         for (const item in err.response.data) {

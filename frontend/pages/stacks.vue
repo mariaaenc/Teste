@@ -1,5 +1,5 @@
 <template>
-  <div class="box column m-5">
+  <div class="box column m-5 p-4">
     <form @submit.prevent="submit">
       <input id="stack-id" v-model="stack.id" type="hidden" />
       <p>Registro de Stacks</p>
@@ -112,15 +112,15 @@ export default {
           msg: 'Operação realizada com sucesso',
         })
         // this.getStacks()
-        this.reset('reload')
+        this.reset()
       } catch (err) {
         for (const item in err.response.data) {
           this.$toast.error(item + ': ' + err.response.data[item])
         }
       }
     },
-    reset(mode) {
-      this.stack = this.stack.id && mode !== 'reload' ? this.original : {}
+    reset() {
+      this.stack = {}
     },
     confirmRemove(stack) {
       this.$buefy.dialog.confirm({
@@ -156,4 +156,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.box {
+  background-color: #e5e5e5;
+}
+</style>
