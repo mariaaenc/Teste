@@ -63,7 +63,7 @@
             Nova Stack
           </b-button>
         </div> -->
-        <b-field>
+        <!-- <b-field>
           <b-tag
             v-for="stack in person.stacks"
             :key="stack.id"
@@ -72,7 +72,7 @@
           >
             {{ stack.stack_name }}
           </b-tag>
-        </b-field>
+        </b-field> -->
         <b-field class="box">
           <div v-for="stack in stacks" :key="stack.id">
             <b-checkbox v-model="checkboxGroup" :native-value="stack.name">
@@ -126,7 +126,7 @@ export default {
           })
         })
         this.person.updated_at = new Date().toISOString()
-        await this.$axios.patch(url, this.person)
+        await this.$axios.put(url, this.person)
         this.$toasted.global.defaultSuccess()
       } catch (err) {
         for (const item in err.response.data) {

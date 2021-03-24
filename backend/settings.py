@@ -128,7 +128,6 @@ AUTH_USER_MODEL = "core.User"
 
 CORS_ORIGIN_WHITELIST = ["http://localhost:3000", "http://127.0.0.1:3000"]
 
-LOGIN_URL = "/api/v1/signin"
 
 SWAGGER_SETTINGS = {
     "SECURITY_DEFINITIONS": {
@@ -136,7 +135,4 @@ SWAGGER_SETTINGS = {
     }
 }
 
-SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=2),
-}
+SIMPLE_JWT = {"ACCESS_TOKEN_LIFETIME": timedelta(minutes=60)}

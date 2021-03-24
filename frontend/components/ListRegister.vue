@@ -145,8 +145,8 @@ export default {
       })
     },
     async remove(person) {
-      person.deleted_at = new Date().toDateString()
-      /* Deveria guardar as informações em um arquivo? */
+      person.deleted_at = new Date().toISOString()
+      /* Deveria guardar as informações em um algum lugar? */
       const url = `/api/persons/${person.id}`
       try {
         await this.$axios.$delete(url)
