@@ -113,5 +113,6 @@ p {
 }
 .form {
   background-color: #e5e5e5;
+  border: #b9b9b9 solid 0.2px;
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
-  <div class="box column m-5 p-4">
+  <div class="box column mx-5 mt-3 p-3 color">
     <form @submit.prevent="submit">
       <input id="stack-id" v-model="stack.id" type="hidden" />
-      <p>Registro de Stacks</p>
+      <p>Registro e Edição de Stacks</p>
       <hr />
       <b-field>
         <input
@@ -157,7 +157,8 @@ export default {
 </script>
 
 <style>
-.box {
+.color {
   background-color: #e5e5e5;
+  border: #b9b9b9 solid 0.2px;
 }
 </style>

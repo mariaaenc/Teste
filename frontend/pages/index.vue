@@ -1,6 +1,6 @@
 <template>
   <section class="section">
-    <div class="columns is-mobile"></div>
+    <p class="columns is-mobile">Seja Bem-Vindo!</p>
   </section>
 </template>
 
